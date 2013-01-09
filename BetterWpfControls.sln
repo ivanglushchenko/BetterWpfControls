@@ -1,7 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterWpfControls.Demo", "BetterWpfControls.Demo\BetterWpfControls.Demo.csproj", "{C20F7095-FC9A-40D7-945B-5A9B6F07FA65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterWpfControls", "BetterWpfControls\BetterWpfControls.csproj", "{2D0B1ED5-4793-406F-8090-2E75D510B1D4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C20F7095-FC9A-40D7-945B-5A9B6F07FA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C20F7095-FC9A-40D7-945B-5A9B6F07FA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C20F7095-FC9A-40D7-945B-5A9B6F07FA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C20F7095-FC9A-40D7-945B-5A9B6F07FA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D0B1ED5-4793-406F-8090-2E75D510B1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D0B1ED5-4793-406F-8090-2E75D510B1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D0B1ED5-4793-406F-8090-2E75D510B1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D0B1ED5-4793-406F-8090-2E75D510B1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
