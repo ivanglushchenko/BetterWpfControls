@@ -48,9 +48,20 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCompleteTextBox.cs" />
+    <Compile Include="CollapsibleGridSplitter.cs" />
+    <Compile Include="Components\CompositeList.cs" />
+    <Compile Include="Components\CompositeListEnumerator.cs" />
+    <Compile Include="Components\CompositeListProxy.cs" />
+    <Compile Include="ContentBox.cs" />
+    <Compile Include="Converters\ConverterParameterToVisibility.cs" />
+    <Compile Include="Converters\NotConverterParameterToVisibility.cs" />
     <Compile Include="SplitButton.cs" />
     <Compile Include="TabControl.cs" />
     <Compile Include="TabItem.cs" />
+    <Compile Include="TreeListBox.cs" />
+    <Compile Include="TreeListBoxItem.cs" />
+    <Compile Include="TreeListBoxItemContainer.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -8,8 +8,10 @@
 	<conv:IdentityConverter x:Key="CONV_Id" />
 	<conv:NullToVisibilityConverter x:Key="CONV_NullToVisibility" />
 	<conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-
-	<SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
+    <conv:ConverterParameterToVisibility x:Key="ConverterParameterToVisibility" />
+    <conv:NotConverterParameterToVisibility x:Key="NotConverterParameterToVisibility" />
+    
+    <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
 	<SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9"/>
 	<SolidColorBrush x:Key="TabItemHotBorderBrush" Color="#3C7FB1"/>
 	<SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4"/>
@@ -331,4 +333,243 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+    <Style TargetType="{x:Type local:AutoCompleteTextBox}">
+        <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="None" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:AutoCompleteTextBox}">
+                    <Grid>
+                        <TextBox Text="{Binding Path=Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="PART_EditableTextBox" FocusVisualStyle="{Binding FocusVisualStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextBox}}}"/>
+
+                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="False" PopupAnimation="None">
+                            <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+                                <Border x:Name="DropDownBorder" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray"/>
+                                <ScrollViewer x:Name="DropDownScrollViewer" ScrollViewer.CanContentScroll="True" Margin="3">
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" FocusVisualStyle="{x:Null}"/>
+                                </ScrollViewer>
+
+                                <TextBlock Text="Nothing was found..." Margin="7,0,20,0" Visibility="{Binding ItemsSource.Count, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource ConverterParameterToVisibility}, ConverterParameter=0}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Button Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType={x:Type local:AutoCompleteTextBox}}}" CommandParameter="{Binding}" FocusVisualStyle="{x:Null}">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid Background="Transparent" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}">
+                                                <ContentPresenter Content="{Binding}" ContentTemplate="{x:Null}" IsHitTestVisible="False" FocusVisualStyle="{x:Null}"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CollapsibleGridSplitter}">
+        <Setter Property="MinWidth" Value="4" />
+        <Setter Property="MinHeight" Value="4" />
+        <Setter Property="ResizeBehavior" Value="PreviousAndNext" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CollapsibleGridSplitter}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="Button" x:Key="VerticalCollapsibleSpliterButton">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="bd" BorderBrush="Transparent" BorderThickness="1" Background="Transparent">
+                                            <StackPanel Margin="0,3">
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="0,2,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="0,2,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="0,2,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="0,2,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="bd" Property="BorderBrush" Value="WhiteSmoke" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                        <Style TargetType="Button" x:Key="HorizontalCollapsibleSpliterButton">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="bd" BorderBrush="Transparent" BorderThickness="1" Background="Transparent">
+                                            <StackPanel Margin="3,0" Orientation="Horizontal">
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="2,0,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="2,0,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="2,0,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="2,0,0,0"/>
+                                                <Ellipse Width="3" Height="3" Stroke="Gray" Fill="Gray" StrokeThickness="1" Margin="2,0,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="bd" Property="BorderBrush" Value="WhiteSmoke" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Grid ClipToBounds="False" x:Name="gr">
+                        <Border x:Name="bd" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ResizeDirection" Value="Columns">
+                            <Setter TargetName="gr" Property="Width" Value="5" />
+                            <Setter TargetName="bd" Property="Width" Value="5" />
+                        </Trigger>
+                        <Trigger Property="ResizeDirection" Value="Rows">
+                            <Setter TargetName="gr" Property="Height" Value="5" />
+                            <Setter TargetName="bd" Property="Height" Value="5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeDirection" Value="Rows">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TreeListBoxItemExpandButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Width="9" Height="9" Background="Transparent">
+                        <Grid x:Name="ExpandPath" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" SnapsToDevicePixels="False">
+                            <Rectangle Width="9" Height="9" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                            <Border Width="1" Height="5" Background="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" x:Name="plus" />
+                            <Border Width="5" Height="1" Background="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="plus"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:TreeListBoxItemContainer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TreeListBoxItemContainer}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Margin}">
+                        <DockPanel>
+                            <ToggleButton IsChecked="{Binding IsExpanded}" Margin="0,0,10,0" Style="{StaticResource TreeListBoxItemExpandButtonStyle}" Visibility="{Binding Children.Count, Converter={StaticResource NotConverterParameterToVisibility}, ConverterParameter=0}"/>
+                            <ContentPresenter />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:ContentBox}">
+        <Setter Property="Padding" Value="4,2,2,2" />
+        <Setter Property="PopupPadding" Value="2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ContentBox}">
+                    <Grid>
+                        <ToggleButton x:Name="ToggleButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press" ToolTip="{TemplateBinding ToolTip}" >
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}">
+                                <Path x:Name="sign" Stroke="Gray" Fill="Black" Data="M 0,0 L 9,0 L 5,5 L 0,0" VerticalAlignment="Center" Margin="0,2,2,0" />
+                                <ContentPresenter Content="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ContentBox}}}" ContentTemplate="{Binding ContentTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ContentBox}}}" />
+                            </StackPanel>
+                        </ToggleButton>
+
+                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="False" PopupAnimation="None">
+                            <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+                                <Border x:Name="DropDownBorder" Background="WhiteSmoke" BorderThickness="1" />
+                                <DockPanel>
+                                    <ScrollViewer x:Name="DropDownScrollViewer" Margin="{TemplateBinding PopupPadding}" VerticalScrollBarVisibility="Auto">
+                                        <Grid>
+                                            <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                                <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=DropDownBorder}" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}"/>
+                                            </Canvas>
+                                            <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </DockPanel>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="sign" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Gold" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+                            <Setter TargetName="ToggleButton" Property="IsEnabled" Value="false" />
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                        </Trigger>
+                        <Trigger Property="AllowsTransparency" SourceName="Popup" Value="true">
+                            <Setter Property="Margin" Value="0,2,0,0" TargetName="DropDownBorder" />
+                            <Setter Property="CornerRadius" TargetName="DropDownBorder" Value="1,1,1,1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Stretch" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

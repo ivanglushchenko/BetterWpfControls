@@ -92,7 +92,43 @@ namespace BetterWpfControls
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            _element.Arrange(new Rect(finalSize));
+            var point = new Point();
+
+            switch (HorizontalAlignment)
+            {
+                case HorizontalAlignment.Left:
+                case HorizontalAlignment.Stretch:
+                    point.X = 0;
+                    break;
+                case HorizontalAlignment.Center:
+                    point.X = AdornedElement.RenderSize.Width / 2.0 - finalSize.Width / 2.0;
+                    break;
+                case HorizontalAlignment.Right:
+                    point.X = AdornedElement.RenderSize.Width - finalSize.Width;
+                    break;
+                default:
+                    break;
+            }
+            switch (VerticalAlignment)
+            {
+                case VerticalAlignment.Top:
+                case VerticalAlignment.Stretch:
+                    point.Y = 0;
+                    break;
+                case VerticalAlignment.Center:
+                    point.Y = AdornedElement.RenderSize.Height / 2.0 - finalSize.Height / 2.0;
+                    break;
+                case VerticalAlignment.Bottom:
+                    break;
+                default:
+                    break;
+            }
+
+            point.X += VerticalOffset;
+            point.Y += HorizontalOffset;
+
+            _element.Arrange(new Rect(point, finalSize));
+
             return finalSize;
         }
 

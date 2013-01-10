@@ -2,394 +2,375 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:bc="BetterWpfControls"
-        Title="Better WPF Controls - Demo" Height="550" Width="600">
+        xmlns:comp="clr-namespace:BetterWpfControls.Demo.Components"
+        Title="Better WPF Controls - Demo" Height="800" Width="600">
 
-	<Window.Resources>
-		<Style TargetType="{x:Type Expander}">
-			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-			<Setter Property="VerticalContentAlignment" Value="Stretch"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
-			<Setter Property="BorderThickness" Value="1"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Expander}">
-						<Border x:Name="bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="3" SnapsToDevicePixels="true">
-							<Grid>
-								<Border BorderBrush="DarkGray" SnapsToDevicePixels="True" BorderThickness="1" Margin="10" CornerRadius="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-								<DockPanel>
-									<ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{x:Null}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" MinWidth="0" MinHeight="0" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-										<ToggleButton.Style>
-											<Style TargetType="{x:Type ToggleButton}">
-												<Setter Property="Template">
-													<Setter.Value>
-														<ControlTemplate TargetType="{x:Type ToggleButton}">
-															<Border Padding="{TemplateBinding Padding}">
-																<Grid Background="Transparent" SnapsToDevicePixels="False">
-																	<Grid.ColumnDefinitions>
-																		<ColumnDefinition Width="19"/>
-																		<ColumnDefinition Width="*"/>
-																	</Grid.ColumnDefinitions>
-																	<Ellipse x:Name="circle" HorizontalAlignment="Center" Height="19" Stroke="DarkGray" Fill="White" VerticalAlignment="Center" Width="19"/>
-																	<Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="#666" StrokeThickness="2" VerticalAlignment="Center"/>
-																	<Border Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Center">
-																		<ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
-																	</Border>
-																</Grid>
-															</Border>
-															<ControlTemplate.Triggers>
-																<Trigger Property="IsChecked" Value="true">
-																	<Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
-																</Trigger>
-																<Trigger Property="IsMouseOver" Value="true">
-																	<Setter Property="Stroke" TargetName="circle" Value="#FF3C7FB1"/>
-																	<Setter Property="Stroke" TargetName="arrow" Value="#222"/>
-																</Trigger>
-																<Trigger Property="IsPressed" Value="true">
-																	<Setter Property="Stroke" TargetName="circle" Value="#FF526C7B"/>
-																	<Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
-																	<Setter Property="Stroke" TargetName="arrow" Value="#FF003366"/>
-																</Trigger>
-															</ControlTemplate.Triggers>
-														</ControlTemplate>
-													</Setter.Value>
-												</Setter>
-											</Style>
-										</ToggleButton.Style>
-									</ToggleButton>
-									<ContentPresenter Margin="30,10,30,30" x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-								</DockPanel>
-							</Grid>
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsExpanded" Value="true">
-								<Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
-								<Setter Property="CornerRadius" TargetName="bd" Value="10,0,10,10"/>
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="false">
-								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+    <Window.Resources>
 
-		<Style TargetType="TextBlock">
-			<Setter Property="VerticalAlignment" Value="Center" />
-		</Style>
-	</Window.Resources>
 
-	<ScrollViewer>
-		<StackPanel Margin="20">
-			<Expander Header="Scrollable Panel">
-				<bc:ScrollablePanel>
-					<Button Content="Button 1" />
-					<Button Content="Button 2" />
-					<Button Content="Button 3" />
-					<Button Content="Button 4" />
-					<Button Content="Button 5" />
-					<Button Content="Button 6" />
-					<Button Content="Button 7" />
-					<Button Content="Button 8" />
-					<Button Content="Button 9" />
-					<Button Content="Button 10" />
-					<Button Content="Button 11" />
-					<Button Content="Button 12" />
-				</bc:ScrollablePanel>
-			</Expander>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
 
-			<Expander Header="Resizable Panel" Margin="0,10,0,0">
-				<StackPanel>
-					<TextBlock Text="In order to get sense of how this panel behaves, resize the width of this window" />
-					<bc:ResizablePanel>
-						<Button>
-							<TextBlock Text="Button 1" TextTrimming="CharacterEllipsis"/>
-						</Button>
-						<Button>
-							<TextBlock Text="Button 2 quite big item" TextTrimming="CharacterEllipsis"/>
-						</Button>
-						<Button>
-							<TextBlock Text="Button 3 ----it's----a----big------one" TextTrimming="CharacterEllipsis"/>
-						</Button>
-						<Button>
-							<TextBlock Text="Button 4X" TextTrimming="CharacterEllipsis"/>
-						</Button>
-						<Button>
-							<TextBlock Text="Button 5X" TextTrimming="CharacterEllipsis"/>
-						</Button>
-					</bc:ResizablePanel>
-				</StackPanel>
-			</Expander>
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <Expander Header="Scrollable Panel">
+                <bc:ScrollablePanel>
+                    <Button Content="Button 1" />
+                    <Button Content="Button 2" />
+                    <Button Content="Button 3" />
+                    <Button Content="Button 4" />
+                    <Button Content="Button 5" />
+                    <Button Content="Button 6" />
+                    <Button Content="Button 7" />
+                    <Button Content="Button 8" />
+                    <Button Content="Button 9" />
+                    <Button Content="Button 10" />
+                    <Button Content="Button 11" />
+                    <Button Content="Button 12" />
+                </bc:ScrollablePanel>
+            </Expander>
 
-			<Expander Header="Menu button" Margin="0,10,0,0">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="140" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="10" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="10" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="10" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
+            <Expander Header="Resizable Panel" Margin="0,10,0,0">
+                <StackPanel>
+                    <TextBlock Text="In order to get sense of how this panel behaves, resize the width of this window" />
+                    <bc:ResizablePanel>
+                        <Button>
+                            <TextBlock Text="Button 1" TextTrimming="CharacterEllipsis"/>
+                        </Button>
+                        <Button>
+                            <TextBlock Text="Button 2 quite big item" TextTrimming="CharacterEllipsis"/>
+                        </Button>
+                        <Button>
+                            <TextBlock Text="Button 3 ----it's----a----big------one" TextTrimming="CharacterEllipsis"/>
+                        </Button>
+                        <Button>
+                            <TextBlock Text="Button 4X" TextTrimming="CharacterEllipsis"/>
+                        </Button>
+                        <Button>
+                            <TextBlock Text="Button 5X" TextTrimming="CharacterEllipsis"/>
+                        </Button>
+                    </bc:ResizablePanel>
+                </StackPanel>
+            </Expander>
 
-					<bc:MenuButton Grid.Row="0" HorizontalAlignment="Left" Command="{Binding SplitButtonCommand}" ContentBorderThickness="0">
-						<bc:MenuButton.Content>Font...</bc:MenuButton.Content>
+            <Expander Header="Menu button" Margin="0,10,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-						<bc:MenuButtonItem>Paragraph...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Tabs...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Language...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Frame...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Style...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Highlight...</bc:MenuButtonItem>
-						<Separator />
-						<bc:MenuButtonItem>Some other items...</bc:MenuButtonItem>
-					</bc:MenuButton>
+                    <bc:MenuButton Grid.Row="0" HorizontalAlignment="Left" Command="{Binding SplitButtonCommand}" ContentBorderThickness="0">
+                        <bc:MenuButton.Content>Font...</bc:MenuButton.Content>
 
-					<TextBlock Grid.Row="0" Grid.Column="1" Text="MenuButton with Content property set to &quot;Format&quot;" FontSize="10"/>
+                        <bc:MenuButtonItem>Paragraph...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Tabs...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Language...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Frame...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Style...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Highlight...</bc:MenuButtonItem>
+                        <Separator />
+                        <bc:MenuButtonItem>Some other items...</bc:MenuButtonItem>
+                    </bc:MenuButton>
 
-					<bc:MenuButton Grid.Row="2" ContentBorderThickness="0,0,0,1" HorizontalAlignment="Left">
-						<bc:MenuButton.Content>Font...</bc:MenuButton.Content>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="MenuButton with Content property set to &quot;Format&quot;" FontSize="10"/>
 
-						<bc:MenuButtonItem>Paragraph...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Tabs...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Language...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Frame...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Style...</bc:MenuButtonItem>
-						<bc:MenuButtonItem>Highlight...</bc:MenuButtonItem>
-						<Separator />
-						<bc:MenuButtonItem>Some other items...</bc:MenuButtonItem>
-					</bc:MenuButton>
+                    <bc:MenuButton Grid.Row="2" ContentBorderThickness="0,0,0,1" HorizontalAlignment="Left">
+                        <bc:MenuButton.Content>Font...</bc:MenuButton.Content>
 
-					<TextBlock Grid.Row="2" Grid.Column="1" Text="The same menu button with ContentBorderThickness = 0,0,0,1 (default)" FontSize="10"/>
+                        <bc:MenuButtonItem>Paragraph...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Tabs...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Language...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Frame...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Style...</bc:MenuButtonItem>
+                        <bc:MenuButtonItem>Highlight...</bc:MenuButtonItem>
+                        <Separator />
+                        <bc:MenuButtonItem>Some other items...</bc:MenuButtonItem>
+                    </bc:MenuButton>
 
-					<StackPanel Grid.Row="4" Orientation="Horizontal">
-						<Button Content="Do something" Width="100" />
-						<bc:MenuButton Margin="4,0,0,0" Command="{Binding SplitButtonCommand}" ItemsSource="{Binding Items}" />
-					</StackPanel>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="The same menu button with ContentBorderThickness = 0,0,0,1 (default)" FontSize="10"/>
 
-					<TextBlock Grid.Row="4" Grid.Column="1" Text="Menu button composed with a usual button" FontSize="10"/>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <Button Content="Do something" Width="100" />
+                        <bc:MenuButton Margin="4,0,0,0" Command="{Binding SplitButtonCommand}" ItemsSource="{Binding Items}" />
+                    </StackPanel>
 
-					<bc:MenuButton Grid.Row="6"  HorizontalAlignment="Left" Command="{Binding SplitButtonCommand}" ItemsSource="{Binding Items}" BorderBrush="DarkGray" BorderThickness="1" Padding="3" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="Menu button composed with a usual button" FontSize="10"/>
 
-					<TextBlock Grid.Row="6" Grid.Column="1" Text="Menu button without content, with BorderThickness = 1" FontSize="10"/>
-				</Grid>
-			</Expander>
+                    <bc:MenuButton Grid.Row="6"  HorizontalAlignment="Left" Command="{Binding SplitButtonCommand}" ItemsSource="{Binding Items}" BorderBrush="DarkGray" BorderThickness="1" Padding="3" />
 
-			<Expander Header="Split button"  Margin="0,10,0,0">
-				<StackPanel>
-					<bc:SplitButton Content="Open" HorizontalAlignment="Left" ItemsSource="{Binding OpenItems}" />
-					<bc:SplitButton Content="Open" HorizontalAlignment="Left">
-						<bc:MenuButtonItem IsHighlightingEnabled="False">
-							<bc:MenuButtonItem.Content>
-								<StackPanel Background="Transparent">
-									<CheckBox Content="Aaaa" />
-									<CheckBox Content="Bbbb" />
-								</StackPanel>
-							</bc:MenuButtonItem.Content>
-						</bc:MenuButtonItem>
-						<bc:MenuButtonItem Content="Additional option 2" Command="{Binding DataContext.SplitButtonItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
-					</bc:SplitButton>
-					<bc:SplitButton Content="Open" HorizontalAlignment="Left" ShowOptions="False" />
-					<bc:SplitButton Content="Open" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding OpenItems}" />
-					<bc:SplitButton Content="Open" Width="100" HorizontalAlignment="Left" ShowOptions="False" />
-				</StackPanel>
-			</Expander>
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="Menu button without content, with BorderThickness = 1" FontSize="10"/>
+                </Grid>
+            </Expander>
 
-			<Expander Header="Image button"  Margin="0,10,0,0">
-				<StackPanel Orientation="Horizontal">
-					<bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/print.png" />
-					<bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/save.png" Margin="4,0,0,0" />
-					<bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/add.png" Margin="4,0,0,0" />
-					<bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/remove.png" Margin="4,0,0,0" />
-				</StackPanel>
-			</Expander>
+            <Expander Header="Split button"  Margin="0,10,0,0">
+                <StackPanel>
+                    <bc:SplitButton Content="Open" HorizontalAlignment="Left" ItemsSource="{Binding OpenItems}" />
+                    <bc:SplitButton Content="Open" HorizontalAlignment="Left">
+                        <bc:MenuButtonItem IsHighlightingEnabled="False">
+                            <bc:MenuButtonItem.Content>
+                                <StackPanel Background="Transparent">
+                                    <CheckBox Content="Aaaa" />
+                                    <CheckBox Content="Bbbb" />
+                                </StackPanel>
+                            </bc:MenuButtonItem.Content>
+                        </bc:MenuButtonItem>
+                        <bc:MenuButtonItem Content="Additional option 2" Command="{Binding DataContext.SplitButtonItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
+                    </bc:SplitButton>
+                    <bc:SplitButton Content="Open" HorizontalAlignment="Left" ShowOptions="False" />
+                    <bc:SplitButton Content="Open" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding OpenItems}" />
+                    <bc:SplitButton Content="Open" Width="100" HorizontalAlignment="Left" ShowOptions="False" />
+                </StackPanel>
+            </Expander>
 
-			<Expander Header="Tab control"  Margin="0,10,0,0">
-				<StackPanel>
-					<TextBlock Text="Simple tab control" FontSize="10"/>
-					<bc:TabControl Margin="0,5,0,0" Height="70" ShowQuickLinksButton="False">
-						<bc:TabItem Header="Summary">
-						</bc:TabItem>
-						<bc:TabItem Header="Simple caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Aaa: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Bbb: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Ccc: a very very long caption">
-						</bc:TabItem>
-					</bc:TabControl>
+            <Expander Header="Image button"  Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/print.png" />
+                    <bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/save.png" Margin="4,0,0,0" />
+                    <bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/add.png" Margin="4,0,0,0" />
+                    <bc:ImageButton Width="32" Height="32" HorizontalAlignment="Left" Source="/BetterWpfControls.Demo;component/Resources/remove.png" Margin="4,0,0,0" />
+                </StackPanel>
+            </Expander>
 
-					<TextBlock Margin="0,10,0,0" Text="Tab control with a fixed tab and quick links button" FontSize="10"/>
-					<bc:TabControl Margin="0,5,0,0" Height="70">
-						<bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
-						</bc:TabItem>
-						<bc:TabItem Header="Simple caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Aaa: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Bbb: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Ccc: a very very long caption">
-						</bc:TabItem>
-					</bc:TabControl>
+            <Expander Header="Tab control"  Margin="0,10,0,0">
+                <StackPanel>
+                    <TextBlock Text="Simple tab control" FontSize="10"/>
+                    <bc:TabControl Margin="0,5,0,0" Height="70" ShowQuickLinksButton="False">
+                        <bc:TabItem Header="Summary">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Simple caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Aaa: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Bbb: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Ccc: a very very long caption">
+                        </bc:TabItem>
+                    </bc:TabControl>
 
-					<TextBlock Margin="0,10,0,0" Text="Tab control which doesn't select items when scroll" FontSize="10" />
-					<bc:TabControl Margin="0,5,0,0" Height="70" SelectItemOnScroll="False">
-						<bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
-						</bc:TabItem>
-						<bc:TabItem Header="Simple caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Aaa: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Bbb: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Ccc: a very very long caption">
-						</bc:TabItem>
-					</bc:TabControl>
+                    <TextBlock Margin="0,10,0,0" Text="Tab control with a fixed tab and quick links button" FontSize="10"/>
+                    <bc:TabControl Margin="0,5,0,0" Height="70">
+                        <bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Simple caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Aaa: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Bbb: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Ccc: a very very long caption">
+                        </bc:TabItem>
+                    </bc:TabControl>
 
-					<TextBlock Margin="0,10,0,0" Text="Custom content for left/right scroll buttons" FontSize="10"/>
-					<bc:TabControl Margin="0,5,0,0" Height="70">
-						<bc:TabControl.ScrollToLeftContent>
-							<Button bc:ScrollablePanel.IsScroller="True" Content="&lt;&lt;" Height="19" Padding="0" Margin="0,0,2,0" />
-						</bc:TabControl.ScrollToLeftContent>
-						<bc:TabControl.ScrollToRightContent>
-							<Button bc:ScrollablePanel.IsScroller="True" Content="&gt;&gt;" Height="19" Padding="0" Margin="2,0,0,0" />
-						</bc:TabControl.ScrollToRightContent>
+                    <TextBlock Margin="0,10,0,0" Text="Tab control which doesn't select items when scroll" FontSize="10" />
+                    <bc:TabControl Margin="0,5,0,0" Height="70" SelectItemOnScroll="False">
+                        <bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Simple caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Aaa: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Bbb: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Ccc: a very very long caption">
+                        </bc:TabItem>
+                    </bc:TabControl>
 
-						<bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
-						</bc:TabItem>
-						<bc:TabItem Header="Simple caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Aaa: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Bbb: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Ccc: a very very long caption">
-						</bc:TabItem>
-					</bc:TabControl>
+                    <TextBlock Margin="0,10,0,0" Text="Custom content for left/right scroll buttons" FontSize="10"/>
+                    <bc:TabControl Margin="0,5,0,0" Height="70">
+                        <bc:TabControl.ScrollToLeftContent>
+                            <Button bc:ScrollablePanel.IsScroller="True" Content="&lt;&lt;" Height="19" Padding="0" Margin="0,0,2,0" />
+                        </bc:TabControl.ScrollToLeftContent>
+                        <bc:TabControl.ScrollToRightContent>
+                            <Button bc:ScrollablePanel.IsScroller="True" Content="&gt;&gt;" Height="19" Padding="0" Margin="2,0,0,0" />
+                        </bc:TabControl.ScrollToRightContent>
 
-					<TextBlock Margin="0,10,0,0" Text="Custom style example" FontSize="10"/>
-					<bc:TabControl Margin="0,5,0,0" Height="70">
-						<bc:TabControl.Resources>
-							<Style TargetType="{x:Type bc:TabControl}">
-								<Setter Property="OverridesDefaultStyle" Value="True" />
-								<Setter Property="SnapsToDevicePixels" Value="True" />
-								<Setter Property="Template">
-									<Setter.Value>
-										<ControlTemplate TargetType="{x:Type bc:TabControl}">
-											<Grid KeyboardNavigation.TabNavigation="Local">
-												<Grid.RowDefinitions>
-													<RowDefinition Height="Auto"/>
-													<RowDefinition Height="*"/>
-												</Grid.RowDefinitions>
-												<DockPanel>
-													<bc:MenuButton x:Name="PART_QuickLinksHost" Margin="1,2,0,0" DockPanel.Dock="Right" Panel.ZIndex="2" VerticalAlignment="Center" />
-													<bc:ScrollablePanel Name="PART_HeaderPanel" Grid.Row="0" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
-												</DockPanel>
-												<Border Name="Border" Grid.Row="1" Background="White" BorderBrush="#888" BorderThickness="1" CornerRadius="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" >
-													<ContentPresenter Name="PART_SelectedContentHost" Margin="4" ContentSource="SelectedContent" />
-												</Border>
-											</Grid>
-										</ControlTemplate>
-									</Setter.Value>
-								</Setter>
-							</Style>
+                        <bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Simple caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Aaa: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Bbb: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Ccc: a very very long caption">
+                        </bc:TabItem>
+                    </bc:TabControl>
 
-							<Style TargetType="{x:Type bc:TabItem}">
-								<Setter Property="Template">
-									<Setter.Value>
-										<ControlTemplate TargetType="{x:Type bc:TabItem}">
-											<Grid>
-												<Border Name="Border" Margin="0,0,-4,0" BorderBrush="#888" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
-													<Border.Background>
-														<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-															<GradientBrush.GradientStops>
-																<GradientStopCollection>
-																	<GradientStop Color="#FFF" Offset="0.0"/>
-																	<GradientStop Color="#EEE" Offset="1.0"/>
-																</GradientStopCollection>
-															</GradientBrush.GradientStops>
-														</LinearGradientBrush>
-													</Border.Background>
-													<ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
-												</Border>
-											</Grid>
-											<ControlTemplate.Triggers>
-												<Trigger Property="IsSelected" Value="True">
-													<Setter Property="Panel.ZIndex" Value="100" />
-													<Setter TargetName="Border" Property="Background" Value="White" />
-													<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
-												</Trigger>
-											</ControlTemplate.Triggers>
-										</ControlTemplate>
-									</Setter.Value>
-								</Setter>
-							</Style>
-						</bc:TabControl.Resources>
+                    <TextBlock Margin="0,10,0,0" Text="Custom style example" FontSize="10"/>
+                    <bc:TabControl Margin="0,5,0,0" Height="70">
+                        <bc:TabControl.Resources>
+                            <Style TargetType="{x:Type bc:TabControl}">
+                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                <Setter Property="SnapsToDevicePixels" Value="True" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type bc:TabControl}">
+                                            <Grid KeyboardNavigation.TabNavigation="Local">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <DockPanel>
+                                                    <bc:MenuButton x:Name="PART_QuickLinksHost" Margin="1,2,0,0" DockPanel.Dock="Right" Panel.ZIndex="2" VerticalAlignment="Center" />
+                                                    <bc:ScrollablePanel Name="PART_HeaderPanel" Grid.Row="0" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
+                                                </DockPanel>
+                                                <Border Name="Border" Grid.Row="1" Background="White" BorderBrush="#888" BorderThickness="1" CornerRadius="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" >
+                                                    <ContentPresenter Name="PART_SelectedContentHost" Margin="4" ContentSource="SelectedContent" />
+                                                </Border>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
 
-						<bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
-						</bc:TabItem>
-						<bc:TabItem Header="Simple caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Aaa: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Bbb: a very very long caption">
-						</bc:TabItem>
-						<bc:TabItem Header="Ccc: a very very long caption">
-						</bc:TabItem>
-					</bc:TabControl>
+                            <Style TargetType="{x:Type bc:TabItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type bc:TabItem}">
+                                            <Grid>
+                                                <Border Name="Border" Margin="0,0,-4,0" BorderBrush="#888" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Color="#FFF" Offset="0.0"/>
+                                                                    <GradientStop Color="#EEE" Offset="1.0"/>
+                                                                </GradientStopCollection>
+                                                            </GradientBrush.GradientStops>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Panel.ZIndex" Value="100" />
+                                                    <Setter TargetName="Border" Property="Background" Value="White" />
+                                                    <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </bc:TabControl.Resources>
 
-					<StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-						<TextBlock Text="Add a tab: " FontSize="10"/>
-						<Button Content=" + " FontSize="10" Command="{Binding AddTabCommand}" />
-					</StackPanel>
-					<bc:TabControl x:Name="tc" Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs1}">
-						<bc:TabControl.ItemContainerStyle>
-							<Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
-								<Setter Property="Header" Value="{Binding Tag}" />
-							</Style>
-						</bc:TabControl.ItemContainerStyle>
-					</bc:TabControl>
+                        <bc:TabItem Header="Summary" bc:ScrollablePanel.IsLocked="True">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Simple caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Aaa: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Bbb: a very very long caption">
+                        </bc:TabItem>
+                        <bc:TabItem Header="Ccc: a very very long caption">
+                        </bc:TabItem>
+                    </bc:TabControl>
 
-					<bc:TabControl Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs2}">
-						<bc:TabControl.ItemContainerStyle>
-							<Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
-								<Setter Property="Header" Value="{Binding}" />
-							</Style>
-						</bc:TabControl.ItemContainerStyle>
-						<bc:TabControl.ItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Tag}" />
-							</DataTemplate>
-						</bc:TabControl.ItemTemplate>
-					</bc:TabControl>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Add a tab: " FontSize="10"/>
+                        <Button Content=" + " FontSize="10" Command="{Binding AddTabCommand}" />
+                    </StackPanel>
+                    <bc:TabControl x:Name="tc" Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs1}">
+                        <bc:TabControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
+                                <Setter Property="Header" Value="{Binding Tag}" />
+                            </Style>
+                        </bc:TabControl.ItemContainerStyle>
+                    </bc:TabControl>
 
-					<bc:TabControl Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs3}" SelectedItem="{Binding SelectedTab3}" SelectItemOnScroll="False">
-						<bc:TabControl.ItemContainerStyle>
-							<Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
-								<Setter Property="Header" Value="{Binding}" />
-							</Style>
-						</bc:TabControl.ItemContainerStyle>
-						<bc:TabControl.ItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Tag}" />
-							</DataTemplate>
-						</bc:TabControl.ItemTemplate>
-					</bc:TabControl>
-				</StackPanel>
-			</Expander>
+                    <bc:TabControl Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs2}">
+                        <bc:TabControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
+                                <Setter Property="Header" Value="{Binding}" />
+                            </Style>
+                        </bc:TabControl.ItemContainerStyle>
+                        <bc:TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Tag}" />
+                            </DataTemplate>
+                        </bc:TabControl.ItemTemplate>
+                    </bc:TabControl>
 
-			<Expander Header="Content adorner" Margin="0,10,0,0">
-				<Button Content="Click to show/hide adorner" Click="Button_Click" />
-			</Expander>
-		</StackPanel>
-	</ScrollViewer>
+                    <bc:TabControl Margin="0,5,0,0" Height="70" ItemsSource="{Binding Tabs3}" SelectedItem="{Binding SelectedTab3}" SelectItemOnScroll="False">
+                        <bc:TabControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type bc:TabItem}" BasedOn="{StaticResource {x:Type bc:TabItem}}">
+                                <Setter Property="Header" Value="{Binding}" />
+                            </Style>
+                        </bc:TabControl.ItemContainerStyle>
+                        <bc:TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Tag}" />
+                            </DataTemplate>
+                        </bc:TabControl.ItemTemplate>
+                    </bc:TabControl>
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="Content adorner" Margin="0,10,0,0">
+                <Button Content="Click to show/hide adorner" Click="Button_Click" />
+            </Expander>
+
+            <Expander Header="Auto-complete textbox"  Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Text="Type something: " VerticalAlignment="Center" />
+                    <bc:AutoCompleteTextBox Margin="8,0,0,0" Width="300" Text="{Binding PrefixForAutoCompleteItem, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Hints}" RequestAutoCompleteItemsCommand="{Binding RequestAutoCompleteItemsCommand}" />
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="Collapsible grid splitter" Margin="0,10,0,0">
+                <Grid Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="A pane to hide" />
+                    </Border>
+
+                    <bc:CollapsibleGridSplitter Grid.Column="1" ResizeDirection="Columns" DefaultValue="200"/>
+
+                    <TextBlock Grid.Column="2" Text="&lt;- Click on this little guy" VerticalAlignment="Center" Margin="20" />
+                </Grid>
+            </Expander>
+
+            <Expander Header="Tree-like list box" Margin="0,10,0,0">
+                <bc:TreeListBox ItemsSource="{Binding TreeList}" Height="200" BorderThickness="0">
+                    <ListBox.Resources>
+                        <DataTemplate DataType="{x:Type comp:FolderNode}">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type comp:FileNode}">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.Resources>
+                </bc:TreeListBox>
+            </Expander>
+
+            <Expander Header="Content box" Margin="0,10,0,0">
+                <bc:ContentBox  PopupPadding="10" Content="Click here">
+                    <TextBlock Text="Yayayaya!" />
+                    <TextBlock Text="A lot of stuff goes in here" />
+                    <Button Content="...like buttons" Margin="0,10,0,0" />
+                    <ComboBox Margin="0,10,0,0" Text="and comboboxes" IsEditable="True">
+                    </ComboBox>
+                </bc:ContentBox>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
 </Window>
