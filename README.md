@@ -15,8 +15,10 @@ What's wrong with default WPF TabControl? Well, nothing...except this:
 Here is what BetterTabControl gives you:
 *Scrolling. If there are too many tabs, you'll see "scroll next/scroll previous" buttons 
 ![](http://i3.codeplex.com/Download?ProjectName=betterwpfcontrols&DownloadId=325767)
+
 *Quick links to all tabs. Even if a tab is not visible, you can jump to it: 
 ![](http://i3.codeplex.com/Download?ProjectName=betterwpfcontrols&DownloadId=325768)
+
 *Locked tabs. If some tabs are too important to be scrolled, lock them (like "Summary" tab on the screenshot):
 ![](http://i3.codeplex.com/Download?ProjectName=betterwpfcontrols&DownloadId=325769)
 
