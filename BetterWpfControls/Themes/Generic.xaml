@@ -437,7 +437,7 @@
                             </Setter>
                         </Style>
                     </ControlTemplate.Resources>
-                    <Grid ClipToBounds="False" x:Name="gr">
+                    <Grid ClipToBounds="False" x:Name="gr" Background="WhiteSmoke">
                         <Border x:Name="bd" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                     </Grid>
                     <ControlTemplate.Triggers>

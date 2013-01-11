@@ -31,7 +31,7 @@ namespace BetterWpfControls.Demo
             var cl = new CompositeList();
             foreach (var item in Enumerable.Range(1, 100))
             {
-                cl.AddCollection(new FolderNode(string.Format("Folder {0}", item), Enumerable.Range(1, 100).Select(i => string.Format("File {0}", i + (item - 1) * 100)).ToList()).List);
+                cl.AddCollection(new FolderNode(string.Format("Folder {0}", item), Enumerable.Range(1, 500).Select(i => string.Format("File {0}", i + (item - 1) * 100)).ToList()).List);
             }
             TreeList = cl;
         }
