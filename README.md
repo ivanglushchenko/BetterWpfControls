@@ -13,6 +13,7 @@ What's wrong with default WPF TabControl? Well, nothing...except this:
 ![](http://i3.codeplex.com/Download?ProjectName=betterwpfcontrols&DownloadId=325765)
 
 Here is what BetterTabControl gives you:
+
 *Scrolling. If there are too many tabs, you'll see "scroll next/scroll previous" buttons 
 ![](http://i3.codeplex.com/Download?ProjectName=betterwpfcontrols&DownloadId=325767)
 
